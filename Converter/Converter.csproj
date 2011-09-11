@@ -1,0 +1,114 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProductVersion>8.0.30703</ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{9192CD45-F118-4871-B208-CDC79A2678CF}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>Converter</RootNamespace>
+    <AssemblyName>Converter</AssemblyName>
+    <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <TargetFrameworkProfile>Client</TargetFrameworkProfile>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="System" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Extensions\BitArrayExtensions.cs" />
+    <Compile Include="Extensions\FileFormatExtensions.cs" />
+    <Compile Include="Extensions\StringExtensions.cs" />
+    <Compile Include="Factories\Constants.cs" />
+    <Compile Include="FileFormats\Base\HeaderBase.cs" />
+    <Compile Include="FileFormats\Base\HeaderParserBase.cs" />
+    <Compile Include="FileFormats\Base\IHeaderBase.cs" />
+    <Compile Include="FileFormats\Base\IHeaderParserBase.cs" />
+    <Compile Include="FileFormats\Base\ISampleCounterBase.cs" />
+    <Compile Include="FileFormats\Base\SampleCounterBase.cs" />
+    <Compile Include="FileFormats\FileFormat.cs" />
+    <Compile Include="FileFormats\Flac\Metadata\Header.cs" />
+    <Compile Include="FileFormats\Flac\Metadata\Block.cs" />
+    <Compile Include="FileFormats\Flac\Metadata\DataBlocks\DataBlockBase.cs" />
+    <Compile Include="FileFormats\Flac\Metadata\HeaderBlock.cs" />
+    <Compile Include="FileFormats\Flac\Metadata\DataBlocks\StreamInfo.cs" />
+    <Compile Include="FileFormats\Flac\Metadata\BlockType.cs" />
+    <Compile Include="FileFormats\Flac\HeaderParser.cs" />
+    <Compile Include="FileFormats\Flac\SampleCounter.cs" />
+    <Compile Include="FileFormats\Wave\HeaderParser.cs" />
+    <Compile Include="FileFormats\Wave\Headers\Chunks\Data.cs" />
+    <Compile Include="FileFormats\Wave\Headers\Chunks\Fact.cs" />
+    <Compile Include="FileFormats\Wave\Headers\Chunks\Formats\Extensible.cs" />
+    <Compile Include="FileFormats\Wave\Headers\Chunks\Formats\FormatBase.cs" />
+    <Compile Include="FileFormats\Wave\Headers\Chunks\FormatCode.cs" />
+    <Compile Include="FileFormats\Wave\Headers\Chunks\Formats\NonPCM.cs" />
+    <Compile Include="FileFormats\Wave\Headers\Chunks\Formats\PCM.cs" />
+    <Compile Include="FileFormats\Wave\Headers\Chunks\RIFF.cs" />
+    <Compile Include="FileFormats\Wave\Headers\Extensible.cs" />
+    <Compile Include="FileFormats\Wave\Headers\HeaderBase.cs" />
+    <Compile Include="FileFormats\Wave\Headers\NonPCM.cs" />
+    <Compile Include="FileFormats\Wave\Headers\PCM.cs" />
+    <Compile Include="FileFormats\Wave\SampleCounter.cs" />
+    <Compile Include="Main\EventArgs\ConversionCanceled.cs" />
+    <Compile Include="Main\EventArgs\ConversionCompleted.cs" />
+    <Compile Include="Main\EventArgs\ConversionUpdated.cs" />
+    <Compile Include="Main\EventArgs\PreparationCanceled.cs" />
+    <Compile Include="Main\EventArgs\PreparationCompleted.cs" />
+    <Compile Include="Main\ProcessorTask.cs" />
+    <Compile Include="Main\Processor.cs" />
+    <Compile Include="Main\ProcessorState.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="BitReader\Reader.cs" />
+    <Compile Include="BitReader\ByteOrder.cs" />
+    <Compile Include="BitReader\DecimalBitConverter.cs" />
+    <Compile Include="BitReader\PrimitiveType.cs" />
+    <Compile Include="Extensions\PrimitiveTypeExtensions.cs" />
+    <Compile Include="Utility\QAAC.cs" />
+    <Compile Include="Utility\Path.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="QAAC\libFLAC.dll" />
+    <None Include="QAAC\msvcp100.dll" />
+    <None Include="QAAC\msvcr100.dll" />
+    <None Include="QAAC\qaac.exe" />
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <PropertyGroup>
+    <PostBuildEvent>
+    </PostBuildEvent>
+  </PropertyGroup>
+  <PropertyGroup>
+    <PreBuildEvent>copy $(ProjectDir)QAAC\* $(TargetDir)</PreBuildEvent>
+  </PropertyGroup>
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>
