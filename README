@@ -1,0 +1,3 @@
+WinForms & console wrapper applications for QAAC.
+Provides ability to convert some of WAVE and ALAC audio into FLAC format.
+Multithreading enabled. QuickTime and .NET Framework 4.0 are required.

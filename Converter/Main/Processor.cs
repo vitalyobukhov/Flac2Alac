@@ -631,9 +631,10 @@ namespace Converter.Main
                 {
                     conversionUpdateTimer.Stop();
 
+                    var previousState = State;
                     State = ProcessorState.Idle;
 
-                    if (State == ProcessorState.Busy)
+                    if (previousState == ProcessorState.Busy)
                     {
                         ConversionCompleted(this,
                             new ConversionCompleted
